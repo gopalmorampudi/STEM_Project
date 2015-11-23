@@ -1,0 +1,115 @@
+executing select query
+<?php
+include "DBConnection.php";
+$mail=$_GET['mail'];
+		 $query="select count(1) as cnt from student where emailid='$mail'";
+		$results=mysql_query($query);
+		$count=0;
+		if($row=mysql_fetch_array($results))
+		{
+			 $count+=$row['cnt'];	
+		}
+		if($count>0)
+		{
+			echo 'exists';	
+		}else{
+			echo 'ok';
+		}
+?>
+making a session start
+<?php
+session_start();
+?>
+setting a value in session
+<?php
+$_SESSION['flag']='success';
+?>
+
+form validatoins
+<script>
+		function studentRegistrationFormValidation(){
+			var username=document.getElementById('studnetName').value;
+			var password=document.getElementById('password').value;
+			var confPassword=document.getElementById('confPassword').value;
+			var emailId=document.getElementById('emailId').value;
+			var major=document.getElementById('major').value;
+			var emailError=document.getElementById('emailError');
+			if(username=='' || password=='' || confPassword=='' || emailId=='' || major==''){
+				if(username==''){
+					alert("Please fill user name field");
+				}
+				if(password==''){
+					alert("Please fill password field");
+				}
+				if(confPassword==''){
+					alert("Please fill confirm password field");
+				}
+				if(emailId==''){
+					alert("Please fill email id field");
+				}
+				if(major==''){
+					alert("Please fill major field");
+				}
+				return false;
+			}
+			if(password!=confPassword){
+				alert("password and confirm password mismatch");
+				return false;
+			}
+			if(emailError.innerHTML=='This email id already exist'){
+				return false;
+			}
+			
+			return true;
+		}
+		
+		
+		
+		function loginFormValidations(){
+	var email=document.getElementById('email').value;
+	var password=document.getElementById('password').value;
+
+	if(email=='' || password==''){
+		if(email==''){	
+			document.getElementById('emailError').innerHTML="Please fill email field";
+			
+		}
+		if(password==''){
+			document.getElementById('passwordError').innerHTML="Please fill password field";
+		}
+		return false;
+	}
+	return true;
+}
+
+function checkFlag(){
+	var flag=document.getElementById('flag').value;
+	if(flag=='success'){
+		document.getElementById('title_log').innerHTML="You have registred successfully";
+	}else if(flag=='loginFailed'){
+		document.getElementById('title_log').innerHTML="<font color='red'>Please check, your email id or password might bewrong</font>";
+	}
+	
+}
+function noneErrors(id1,id2){
+	if(id1.value!=''){
+		id2.innerHTML='';
+	}
+}
+	</script>
+	
+To get Next one week dates
+<?php
+$date='2015-11-22';
+$curr_date=date("Y-m-d");
+$dateArray=explode("-",$date);
+$curr_dateArray=explode("-",$curr_date);
+$diff=$dateArray[2]-$curr_dateArray[2];
+echo $diff.'<br>';
+// while($diff<8){
+	for($i=0;$i<7;$i++){
+	echo $date1=date('Y-m-d l', mktime(0, 0, 0, date('m'), date('d') +$diff , date('Y')));
+	echo "<br>";
+	$diff++;
+}
+?>

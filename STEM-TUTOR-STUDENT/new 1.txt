@@ -1,0 +1,75 @@
+ResponseVo obj2=(ResponseVo)session.getAttribute("responseVo2");
+		
+		if(obj2!=null)
+		{
+		%>
+		</div>
+		
+		<div style="width:100%;position: relative;min-height: 1px;overflow: auto; border: 1px solid red;">
+		&nbsp;
+		
+		<div class="topUp">
+		<%=obj2.getCountry()%>
+		</div>&nbsp;
+		
+		<%	
+		if(mobileno1!=null)
+		{
+			%>
+			
+			&nbsp;
+			<div class="topUp">
+			<%=mobileno1%>
+			</div>
+			
+			<%	
+		}
+	}	
+		/* Display Operator Logo */
+		
+		if(obj2!=null){
+			int ii=obj2.getPriceoperatorid();
+		%>
+		<img src="https://fm.transfer-to.com/logo_operator/logo-<%=ii%>-1.png">
+		<a href="GetOperatorSrv?type=change&countrycode=<%=obj2.getCountryid()%>">Change</a>
+	<%
+	}
+		
+		
+		/* Data base Promotions */
+		
+		if(DBpromo!=null)
+		{
+			%>
+			<%=DBpromo.getCountryid()%><br>
+			<%=DBpromo.getOperatorid()%><br>
+			<%=DBpromo.getPromotion()%><br>
+			<%=DBpromo.getDenominations()%><br>
+			<%=DBpromo.getDenominationslocal()%><br>
+			<%=DBpromo.getPromo_start()%><br>
+			<%=DBpromo.getPromo_end()%><br>
+			<%=DBpromo.getTermsandconditions()%><br>
+			<%
+			session.removeAttribute("promovo");
+		}
+		
+		/* Second Time Denominations */
+		
+		if(obj2!=null )
+		{
+			String[] getPriceList2=obj2.getPriceListArray2();
+			String[] getRetailPrice2=obj2.getRetailpriceListArray();
+			for(int i=0;i<getPriceList2.length;i++)
+			{
+				%>		
+			<div class="topUp" onclick="document.getElementById('productReq').value=document.getElementById('retail<%=i%>').value;">
+			<input type="hidden" value="<%=getRetailPrice2[i]%>" id="retail<%=i%>"/>
+				<u><%=getPriceList2[i]%>&nbsp;&nbsp;<%=obj2.getDesti_currency()%></u><br>
+				<%=getRetailPrice2[i]+" ".concat("USD")%></b>
+			</div>
+			&nbsp;	
+			<%		
+			}
+		}
+		%>
+		</div>
