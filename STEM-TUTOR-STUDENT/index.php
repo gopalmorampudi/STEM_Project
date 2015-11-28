@@ -41,7 +41,7 @@ $subjectsArray=$object->getAllSubject();
 					 <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Student<b class="caret"></b></a> 
                         <ul class="dropdown-menu">
-                            <li><a href="login_student.html">Login</a></li>
+                            <li><a href="login_student.html">Login Modified</a></li>
                             <li class="active"><a href="studentregister.php">Register</a></li>
                          </ul>
                     </li>
